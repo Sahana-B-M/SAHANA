@@ -1,0 +1,423 @@
+mysql> desc book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| bookid    | varchar(20) | NO   | PRI | NULL    |       |
+| bookname  | varchar(20) | YES  |     | NULL    |       |
+| Authorid  | char(20)    | YES  |     | NULL    |       |
+| publisher | char(20)    | YES  |     | NULL    |       |
+| branchid  | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc branch;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| branchid   | varchar(20) | NO   | PRI | NULL    |       |
+| branchname | varchar(20) | YES  |     | NULL    |       |
+| HOD        | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| USN      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc Author;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Authorid   | varchar(20) | NO   | PRI | NULL    |       |
+| Authorname | varchar(20) | YES  |     | NULL    |       |
+| country    | varchar(20) | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc borrow;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| USN         | varchar(10) | YES  | MUL | NULL    |       |
+| bookid      | varchar(20) | YES  | MUL | NULL    |       |
+| borrow_date | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+              2nd dbms;
+              
+              
+              
+              
+              base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC037 -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'VP21MC037'@'192.168.14.67' (using password: YES)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC037 -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'VP21MC037'@'192.168.14.67' (using password: YES)
+(base) mca@mca-System-Product-Name:~$ mysql -h 192.168.14.71 -u VP21MC037 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 43
+Server version: 8.0.29-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| VP21MC037_college  |
+| information_schema |
++--------------------+
+2 rows in set (0.03 sec)
+
+mysql> desc branch;
+ERROR 1046 (3D000): No database selected
+mysql> use databases;
+ERROR 1044 (42000): Access denied for user 'VP21MC037'@'%' to database 'databases'
+mysql> use VP21MC037_college;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC037_college |
++-----------------------------+
+| Author                      |
+| book                        |
+| borrow                      |
+| branch                      |
+| student                     |
++-----------------------------+
+5 rows in set (0.01 sec)
+
+mysql> select * from author;
+ERROR 1146 (42S02): Table 'VP21MC037_college.author' doesn't exist
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> select * from Author;
++----------+------------+---------+------+
+| Authorid | Authorname | country | age  |
++----------+------------+---------+------+
+| 01       | deepu      | india   |   34 |
+| 31       | shrunga    | india   |   43 |
+| 34       | teju       | india   |   53 |
+| 36       | shiv       | india   |   54 |
+| 37       | siri       | india   |   57 |
++----------+------------+---------+------+
+5 rows in set (0.00 sec)
+
+mysql> desc Author;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Authorid   | varchar(20) | NO   | PRI | NULL    |       |
+| Authorname | varchar(20) | YES  |     | NULL    |       |
+| country    | varchar(20) | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from book;
++--------+----------+----------+-----------+----------+
+| bookid | bookname | Authorid | publisher | branchid |
++--------+----------+----------+-----------+----------+
+| 01     | DBMS     | 1        | PEARSON   | B1       |
+| 03     | java     | 01       | hjsjc     | B1       |
+| 04     | jcs      | 31       | hjsjc     | mca      |
+| 05     | jcs      | 36       | hjsjc     | mca01    |
+| 1      | DBMS     | 1        | PEARSON   | B1       |
+| BK1    | DBMS     | 1        | PEARSON   | B1       |
++--------+----------+----------+-----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> desc book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| bookid    | varchar(20) | NO   | PRI | NULL    |       |
+| bookname  | varchar(20) | YES  |     | NULL    |       |
+| Authorid  | char(20)    | YES  |     | NULL    |       |
+| publisher | char(20)    | YES  |     | NULL    |       |
+| branchid  | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from student;
++-----------+---------+------------+----------+------+
+| USN       | name    | address    | branchid | sem  |
++-----------+---------+------------+----------+------+
+| 4VP21MC37 | sahana  | davanagere | B1       | sec  |
+| mca       | sahana  | dvg        | mca01    | sec  |
+| mca01     | shrunga | tumkur     | B1       | sec  |
++-----------+---------+------------+----------+------+
+3 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| USN      | varchar(20) | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| address  | varchar(20) | YES  |     | NULL    |       |
+| branchid | varchar(20) | YES  | MUL | NULL    |       |
+| sem      | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> select * from branch;
++----------+------------+---------+
+| branchid | branchname | HOD     |
++----------+------------+---------+
+| B1       | mca        | vandana |
+| BE       | B3         | null    |
+| branch   | branchid   | HOD     |
+| cs       | B4         | not     |
+| mba      | B2         | iyer    |
+| mca      | B1         | vandana |
+| mca01    | mca        | vandana |
++----------+------------+---------+
+7 rows in set (0.00 sec)
+
+mysql> desc branch;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| branchid   | varchar(20) | NO   | PRI | NULL    |       |
+| branchname | varchar(20) | YES  |     | NULL    |       |
+| HOD        | varchar(20) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select * from borrow;
+Empty set (0.00 sec)
+
+mysql> create table team(tid varchar(20) PRIMARY KEY,tname char(20),captain_id varchar(20),city char(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc team;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| tid        | varchar(20) | NO   | PRI | NULL    |       |
+| tname      | char(20)    | YES  |     | NULL    |       |
+| captain_id | varchar(20) | YES  |     | NULL    |       |
+| city       | char(20)    | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create table player(pid varchar(20) PRIMARY KEY,pname varchar(20),age int(10) not null,tid varchar(20) FOREIGN KEY);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY)' at line 1
+mysql> create table player(pid varchar(20) PRIMARY KEY,pname varchar(20),age int(10) not null,tid varchar(20));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(20) | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | NO   |     | NULL    |       |
+| tid   | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table stadium(sid varchar(20) PRIMARY KEY,sname char(20),pincode varchar(20),city varchar(20),area varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc stadium;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | varchar(20) | NO   | PRI | NULL    |       |
+| sname   | char(20)    | YES  |     | NULL    |       |
+| pincode | varchar(20) | YES  |     | NULL    |       |
+| city    | varchar(20) | YES  |     | NULL    |       |
+| area    | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table matches(mid varchar(20) PRIMARY KEY,mdate date,time char(20),tid1 varchar(20),tid2 varchar(20),winning_tid varchar(20),man_of_match varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc stadium;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | varchar(20) | NO   | PRI | NULL    |       |
+| sname   | char(20)    | YES  |     | NULL    |       |
+| pincode | varchar(20) | YES  |     | NULL    |       |
+| city    | varchar(20) | YES  |     | NULL    |       |
+| area    | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc matches;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| mid          | varchar(20) | NO   | PRI | NULL    |       |
+| mdate        | date        | YES  |     | NULL    |       |
+| time         | char(20)    | YES  |     | NULL    |       |
+| tid1         | varchar(20) | YES  |     | NULL    |       |
+| tid2         | varchar(20) | YES  |     | NULL    |       |
+| winning_tid  | varchar(20) | YES  |     | NULL    |       |
+| man_of_match | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table player_phone(pid varchar(20) PRIMARY KEY,phone int(10));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc player_phone;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(20) | NO   | PRI | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter team coach varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'team coach varchar(20)' at line 1
+mysql> alter table coach;
+ERROR 1146 (42S02): Table 'VP21MC037_college.coach' doesn't exist
+mysql> alter table coach varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(20)' at line 1
+mysql> alter table coach;
+ERROR 1146 (42S02): Table 'VP21MC037_college.coach' doesn't exist
+mysql> alter table team;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from team;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc team;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| tid        | varchar(20) | NO   | PRI | NULL    |       |
+| tname      | char(20)    | YES  |     | NULL    |       |
+| captain_id | varchar(20) | YES  |     | NULL    |       |
+| city       | char(20)    | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> drop table team;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc team;
+ERROR 1146 (42S02): Table 'VP21MC037_college.team' doesn't exist
+mysql> create table team(tid varchar(20) PRIMARY KEY,tname char(20),coach varchar(20),captain_id varchar(20),city char(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc team;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| tid        | varchar(20) | NO   | PRI | NULL    |       |
+| tname      | char(20)    | YES  |     | NULL    |       |
+| coach      | varchar(20) | YES  |     | NULL    |       |
+| captain_id | varchar(20) | YES  |     | NULL    |       |
+| city       | char(20)    | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> deac player;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'deac player' at line 1
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(20) | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | NO   |     | NULL    |       |
+| tid   | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc stadium;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | varchar(20) | NO   | PRI | NULL    |       |
+| sname   | char(20)    | YES  |     | NULL    |       |
+| pincode | varchar(20) | YES  |     | NULL    |       |
+| city    | varchar(20) | YES  |     | NULL    |       |
+| area    | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc matches;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| mid          | varchar(20) | NO   | PRI | NULL    |       |
+| mdate        | date        | YES  |     | NULL    |       |
+| time         | char(20)    | YES  |     | NULL    |       |
+| tid1         | varchar(20) | YES  |     | NULL    |       |
+| tid2         | varchar(20) | YES  |     | NULL    |       |
+| winning_tid  | varchar(20) | YES  |     | NULL    |       |
+| man_of_match | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc player_phone;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | varchar(20) | NO   | PRI | NULL    |       |
+| phone | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> delete table matches;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table matches' at line 1
+mysql> desc matches;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| mid          | varchar(20) | NO   | PRI | NULL    |       |
+| mdate        | date        | YES  |     | NULL    |       |
+| time         | char(20)    | YES  |     | NULL    |       |
+| tid1         | varchar(20) | YES  |     | NULL    |       |
+| tid2         | varchar(20) | YES  |     | NULL    |       |
+| winning_tid  | varchar(20) | YES  |     | NULL    |       |
+| man_of_match | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc matches;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| mid          | varchar(20) | NO   | PRI | NULL    |       |
+| mdate        | date        | YES  |     | NULL    |       |
+| time         | char(20)    | YES  |     | NULL    |       |
+| tid1         | varchar(20) | YES  |     | NULL    |       |
+| tid2         | varchar(20) | YES  |     | NULL    |       |
+| winning_tid  | varchar(20) | YES  |     | NULL    |       |
+| man_of_match | varchar(20) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> 
+
+
+
